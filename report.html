@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counsellor Report · EduGuard</title>
+<meta name="description" content="Printable counsellor report: risk summary and student support plans.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/base.css">
+<link rel="stylesheet" href="ui/print.css">
+<script src="web/data.js"></script>
+</head>
+<body data-page="report">
+
+<div class="toolbar-print">
+  <div>
+    <b id="toolTitle">Counsellor report</b>
+    <span class="hint">In the print window, choose <b>"Save as PDF"</b> as the printer.</span>
+  </div>
+  <div class="tb-btns">
+    <a class="btn small" id="back" href="dashboard.html">← Back</a>
+    <button class="btn solid small" type="button" id="savePdf">Save as PDF <span class="arr">↓</span></button>
+  </div>
+</div>
+
+<article class="sheet" id="sheet"></article>
+
+<script src="web/model.js"></script>
+<script src="ui/common.js"></script>
+<script src="ui/print.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counsellor Dashboard · EduGuard</title>
+<meta name="description" content="Every student sorted into Act now, Monitor and On track, with reasons and suggested support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/base.css">
+<link rel="stylesheet" href="ui/dashboard.css">
+<script src="web/data.js"></script>
+</head>
+<body data-page="dashboard">
+<main class="page wide">
+
+  <header class="phead">
+    <div>
+      <span class="mono">Counsellor dashboard</span>
+      <h1>Who needs help first?</h1>
+      <p>Every student, sorted into three lanes. Open a card to see why and what to do.</p>
+    </div>
+    <div class="head-tools">
+      <input id="search" type="search" placeholder="Find a student ID" aria-label="Find a student ID">
+      <a class="btn solid" href="report.html">Summary report (PDF) <span class="arr">↓</span></a>
+    </div>
+  </header>
+
+  <!-- lane switch (phones only) -->
+  <div class="lane-switch" id="laneSwitch"></div>
+
+  <!-- triage board -->
+  <div class="board" id="board"></div>
+
+</main>
+
+<!-- student window -->
+<div class="scrim" id="scrim"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-in" id="modalBody" data-lenis-prevent></div>
+</div>
+
+<script src="web/model.js"></script>
+<script src="ui/common.js"></script>
+<script src="ui/dashboard.js"></script>
+</body>
+</html>

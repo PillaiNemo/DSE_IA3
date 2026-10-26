@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insights · EduGuard</title>
+<meta name="description" content="What past student records show about who drops out and why.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/base.css">
+<link rel="stylesheet" href="ui/report.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="web/data.js"></script>
+</head>
+<body data-page="analysis">
+<main class="page">
+
+  <header class="phead">
+    <div>
+      <span class="mono">Insights</span>
+      <h1>What past students tell us</h1>
+      <p>Patterns from thousands of past student records: who dropped out, and what they had in common.</p>
+    </div>
+  </header>
+
+  <section class="band hero-split" data-reveal>
+    <div>
+      <span class="lbl">At a glance</span>
+      <h2>About one in three students in these records left before finishing.</h2>
+      <p id="glance"></p>
+    </div>
+    <div class="donut-wrap"><canvas id="cDonut"></canvas><div class="donut-mid"><b id="donutPct"></b><span>dropped out</span></div></div>
+  </section>
+
+  <!-- warning signs -->
+  <section class="sec-gap">
+    <div class="sec-head"><h2>Warning signs <span class="soft">to watch for.</span></h2>
+      <p>Dropout rate for each group, compared side by side.</p></div>
+    <div class="signals" id="signals"></div>
+    <div class="split-2 gap">
+      <div class="card"><h3>Dropout rate by subjects passed in semester 1</h3><p class="sub">The first semester is the clearest early signal.</p>
+        <div class="chart"><canvas id="cUnits"></canvas></div>
+        <p class="takeaway"><b>Takeaway:</b> students who pass fewer than 3 subjects in their first semester mostly drop out.</p></div>
+      <div class="card"><h3>Most linked to dropping out</h3><p class="sub">Orange goes with more dropout, dark with less.</p>
+        <div class="chart"><canvas id="cCorr"></canvas></div></div>
+    </div>
+  </section>
+
+  <!-- profiles -->
+  <section class="sec-gap">
+    <div class="sec-head"><h2>Three kinds of <span class="soft">students.</span></h2>
+      <p>Grouping students by how similar their records are reveals three clear profiles.</p></div>
+    <div class="card" data-reveal><div class="share" id="share"></div><div class="share-key" id="shareKey"></div></div>
+    <div class="grid3 gap" id="profiles"></div>
+  </section>
+
+  <!-- early signal -->
+  <section class="sec-gap">
+    <div class="sec-head"><h2>Semester 1 <span class="soft">predicts semester 2.</span></h2>
+      <p>So support can start right after the first semester.</p></div>
+    <div class="signal-split">
+      <div class="mini-stack">
+        <div class="mini dark" data-reveal><span class="lbl">Explained by semester 1</span><b id="r2"></b>
+          <p>of the differences in semester-2 grades come from semester-1 results alone.</p></div>
+        <div class="mini" data-reveal><span class="lbl">Typical prediction error</span><b id="rmse"></b>
+          <p>grade points (out of 20) between predicted and actual semester-2 grades.</p></div>
+        <div class="mini lime" data-reveal><span class="lbl">Passing subjects matters</span><b id="units"></b>
+          <p id="unitsTxt"></p></div>
+      </div>
+      <div class="card"><h3>Predicted vs. actual semester-2 grade</h3><p class="sub">Dots near the line were predicted well.</p>
+        <img class="fig" src="reports/figures/regression_actual_vs_predicted.png" alt="Predicted versus actual semester-2 grade"></div>
+    </div>
+  </section>
+
+</main>
+<script src="ui/common.js"></script>
+<script src="ui/analysis.js"></script>
+</body>
+</html>

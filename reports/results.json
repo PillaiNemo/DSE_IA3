@@ -1,0 +1,629 @@
+{
+ "data": {
+  "explore": {
+   "rows": 4424,
+   "features": 36,
+   "missing": 0,
+   "targets": {
+    "Graduate": 2209,
+    "Dropout": 1421,
+    "Enrolled": 794
+   },
+   "dropout_rate": 0.3212,
+   "descriptive": {
+    "mean": {
+     "Age at enrollment": 23.27,
+     "Admission grade": 126.98,
+     "Curricular units 1st sem (approved)": 4.71,
+     "Curricular units 1st sem (grade)": 10.64,
+     "Curricular units 2nd sem (grade)": 10.23
+    },
+    "median": {
+     "Age at enrollment": 20.0,
+     "Admission grade": 126.1,
+     "Curricular units 1st sem (approved)": 5.0,
+     "Curricular units 1st sem (grade)": 12.29,
+     "Curricular units 2nd sem (grade)": 12.2
+    },
+    "var": {
+     "Age at enrollment": 57.57,
+     "Admission grade": 209.73,
+     "Curricular units 1st sem (approved)": 9.57,
+     "Curricular units 1st sem (grade)": 23.46,
+     "Curricular units 2nd sem (grade)": 27.15
+    },
+    "std": {
+     "Age at enrollment": 7.59,
+     "Admission grade": 14.48,
+     "Curricular units 1st sem (approved)": 3.09,
+     "Curricular units 1st sem (grade)": 4.84,
+     "Curricular units 2nd sem (grade)": 5.21
+    }
+   },
+   "by_units": {
+    "0": 0.7939,
+    "1": 0.7323,
+    "2": 0.7,
+    "3": 0.5167,
+    "4": 0.3649,
+    "5": 0.2006,
+    "6": 0.0999,
+    "7": 0.0701,
+    "8": 0.0926,
+    "9": 0.2,
+    "10": 0.1765
+   },
+   "by_fees": {
+    "Not paid": 0.8655,
+    "Paid": 0.2474
+   },
+   "by_debtor": {
+    "No": 0.2828,
+    "Yes": 0.6203
+   },
+   "by_scholarship": {
+    "No": 0.3871,
+    "Yes": 0.1219
+   },
+   "by_gender": {
+    "Female": 0.251,
+    "Male": 0.4505
+   },
+   "correlation": {
+    "Curricular units 2nd sem (grade)": -0.572,
+    "Curricular units 2nd sem (approved)": -0.57,
+    "Curricular units 1st sem (grade)": -0.481,
+    "Curricular units 1st sem (approved)": -0.479,
+    "Tuition fees up to date": -0.429,
+    "Age at enrollment": 0.254,
+    "Scholarship holder": -0.245,
+    "Debtor": 0.229
+   }
+  },
+  "inference": {
+   "ci": [
+    0.3074,
+    0.335
+   ],
+   "t": -35.32,
+   "t_p": "1.4e-223",
+   "chi2": 265.1,
+   "chi2_dof": 1,
+   "chi2_p": "1.3e-59"
+  },
+  "regression": {
+   "linear": {
+    "r2": 0.712,
+    "rmse": 2.79
+   },
+   "poly2": {
+    "r2": 0.735,
+    "rmse": 2.679
+   }
+  },
+  "clusters": {
+   "k": 3,
+   "silhouette": [
+    0.49,
+    0.491,
+    0.437,
+    0.299,
+    0.315,
+    0.325,
+    0.285
+   ],
+   "profile": [
+    {
+     "age": 22.41,
+     "admission": 127.3,
+     "approved1": 5.86,
+     "grade1": 12.79,
+     "grade2": 12.7,
+     "fees": 1.0,
+     "dropout": 0.15,
+     "size": 3283
+    },
+    {
+     "age": 24.64,
+     "admission": 127.23,
+     "approved1": 0.37,
+     "grade1": 2.07,
+     "grade2": 0.73,
+     "fees": 1.0,
+     "dropout": 0.75,
+     "size": 619
+    },
+    {
+     "age": 26.99,
+     "admission": 124.64,
+     "approved1": 2.58,
+     "grade1": 7.27,
+     "grade2": 5.94,
+     "fees": 0.0,
+     "dropout": 0.87,
+     "size": 522
+    }
+   ]
+  }
+ },
+ "model": {
+  "evaluation": {
+   "confusion": [
+    [
+     537,
+     64
+    ],
+    [
+     48,
+     236
+    ]
+   ],
+   "roc": {
+    "Logistic Regression": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.0,
+      0.201
+     ],
+     [
+      0.003,
+      0.257
+     ],
+     [
+      0.005,
+      0.465
+     ],
+     [
+      0.007,
+      0.504
+     ],
+     [
+      0.008,
+      0.532
+     ],
+     [
+      0.012,
+      0.535
+     ],
+     [
+      0.013,
+      0.553
+     ],
+     [
+      0.015,
+      0.567
+     ],
+     [
+      0.022,
+      0.634
+     ],
+     [
+      0.023,
+      0.648
+     ],
+     [
+      0.027,
+      0.655
+     ],
+     [
+      0.028,
+      0.665
+     ],
+     [
+      0.035,
+      0.68
+     ],
+     [
+      0.037,
+      0.701
+     ],
+     [
+      0.038,
+      0.736
+     ],
+     [
+      0.042,
+      0.739
+     ],
+     [
+      0.057,
+      0.743
+     ],
+     [
+      0.058,
+      0.754
+     ],
+     [
+      0.06,
+      0.757
+     ],
+     [
+      0.075,
+      0.771
+     ],
+     [
+      0.077,
+      0.778
+     ],
+     [
+      0.082,
+      0.789
+     ],
+     [
+      0.083,
+      0.792
+     ],
+     [
+      0.087,
+      0.799
+     ],
+     [
+      0.092,
+      0.806
+     ],
+     [
+      0.1,
+      0.82
+     ],
+     [
+      0.113,
+      0.831
+     ],
+     [
+      0.118,
+      0.835
+     ],
+     [
+      0.123,
+      0.845
+     ],
+     [
+      0.131,
+      0.852
+     ],
+     [
+      0.146,
+      0.856
+     ],
+     [
+      0.148,
+      0.859
+     ],
+     [
+      0.156,
+      0.866
+     ],
+     [
+      0.17,
+      0.877
+     ],
+     [
+      0.175,
+      0.884
+     ],
+     [
+      0.176,
+      0.891
+     ],
+     [
+      0.195,
+      0.894
+     ],
+     [
+      0.2,
+      0.898
+     ],
+     [
+      0.206,
+      0.901
+     ],
+     [
+      0.216,
+      0.908
+     ],
+     [
+      0.223,
+      0.915
+     ],
+     [
+      0.236,
+      0.919
+     ],
+     [
+      0.245,
+      0.926
+     ],
+     [
+      0.248,
+      0.93
+     ],
+     [
+      0.285,
+      0.933
+     ],
+     [
+      0.293,
+      0.937
+     ],
+     [
+      0.336,
+      0.944
+     ],
+     [
+      0.399,
+      0.947
+     ],
+     [
+      0.478,
+      0.951
+     ],
+     [
+      0.507,
+      0.954
+     ],
+     [
+      0.601,
+      0.965
+     ],
+     [
+      0.647,
+      0.968
+     ],
+     [
+      0.676,
+      0.972
+     ],
+     [
+      0.705,
+      0.979
+     ],
+     [
+      0.709,
+      0.982
+     ],
+     [
+      0.859,
+      0.986
+     ],
+     [
+      0.872,
+      0.989
+     ],
+     [
+      0.885,
+      0.996
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "KNN": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.005,
+      0.349
+     ],
+     [
+      0.02,
+      0.479
+     ],
+     [
+      0.052,
+      0.602
+     ],
+     [
+      0.15,
+      0.725
+     ],
+     [
+      0.439,
+      0.923
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ],
+    "Decision Tree": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.002,
+      0.004
+     ],
+     [
+      0.018,
+      0.518
+     ],
+     [
+      0.018,
+      0.581
+     ],
+     [
+      0.03,
+      0.62
+     ],
+     [
+      0.03,
+      0.63
+     ],
+     [
+      0.033,
+      0.637
+     ],
+     [
+      0.047,
+      0.665
+     ],
+     [
+      0.048,
+      0.669
+     ],
+     [
+      0.05,
+      0.676
+     ],
+     [
+      0.058,
+      0.718
+     ],
+     [
+      0.075,
+      0.722
+     ],
+     [
+      0.13,
+      0.799
+     ],
+     [
+      0.163,
+      0.82
+     ],
+     [
+      0.178,
+      0.827
+     ],
+     [
+      0.185,
+      0.835
+     ],
+     [
+      0.479,
+      0.919
+     ],
+     [
+      0.489,
+      0.94
+     ],
+     [
+      0.975,
+      0.982
+     ],
+     [
+      0.995,
+      0.982
+     ],
+     [
+      1.0,
+      1.0
+     ]
+    ]
+   }
+  },
+  "overfitting": {
+   "depths": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "train": [
+    0.829,
+    0.857,
+    0.863,
+    0.867,
+    0.878,
+    0.891,
+    0.905,
+    0.916,
+    0.93,
+    0.941,
+    0.952,
+    0.964,
+    0.973,
+    0.979,
+    0.984
+   ],
+   "test": [
+    0.843,
+    0.852,
+    0.86,
+    0.852,
+    0.854,
+    0.852,
+    0.843,
+    0.84,
+    0.835,
+    0.827,
+    0.817,
+    0.818,
+    0.815,
+    0.808,
+    0.807
+   ]
+  },
+  "ethics": {
+   "fairness": [
+    {
+     "group": "Female",
+     "n": 564,
+     "actual": 0.245,
+     "predicted": 0.252,
+     "recall": 0.812
+    },
+    {
+     "group": "Male",
+     "n": 321,
+     "actual": 0.455,
+     "predicted": 0.492,
+     "recall": 0.849
+    },
+    {
+     "group": "No scholarship",
+     "n": 654,
+     "actual": 0.39,
+     "predicted": 0.42,
+     "recall": 0.855
+    },
+    {
+     "group": "Scholarship",
+     "n": 231,
+     "actual": 0.126,
+     "predicted": 0.108,
+     "recall": 0.621
+    }
+   ],
+   "weights": {
+    "Curricular units 2nd sem (approved)": -1.826,
+    "Curricular units 1st sem (approved)": -0.923,
+    "Curricular units 2nd sem (enrolled)": 0.824,
+    "Tuition fees up to date": -0.719,
+    "Curricular units 2nd sem (credited)": 0.506,
+    "International": -0.353,
+    "Mother's occupation": -0.341,
+    "Age at enrollment": 0.341,
+    "Nacionality": 0.296,
+    "Curricular units 2nd sem (grade)": -0.294
+   }
+  },
+  "recommender": {
+   "k": 5,
+   "flagged": 203,
+   "accuracy": 0.836,
+   "precision": 0.842,
+   "recall": 0.602
+  },
+  "train_size": 3539,
+  "test_size": 885
+ }
+}

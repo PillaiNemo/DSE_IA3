@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EduGuard · Dropout Early Warning</title>
+<meta name="description" content="EduGuard spots students at risk of dropping out early, explains why, and helps counsellors plan the right support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/base.css">
+<link rel="stylesheet" href="ui/overview.css">
+<script src="web/data.js"></script>
+</head>
+<body data-page="overview">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <div class="hero-in">
+    <div class="hero-copy">
+      <span class="eyebrow" data-reveal>Early-warning &amp; counselling support</span>
+      <h1 data-split>Catch dropouts <span class="soft">before they happen.</span></h1>
+      <p data-reveal>EduGuard learns from 4,424 past students, sorts every student into
+        <b>Red, Yellow or Green</b> risk, explains why, and suggests how a counsellor can help.</p>
+      <div class="cta" data-reveal>
+        <a class="btn lime" href="dashboard.html">Open dashboard <span class="arr">→</span></a>
+        <a class="btn ghost light" href="#how">How it works</a>
+      </div>
+    </div>
+    <div class="hero-widgets" id="widgets">
+      <div class="widget w-risk float1" data-reveal>
+        <div class="wh"><b>Risk overview</b><span class="pill live">● Live model</span></div>
+        <div id="tierRows"></div>
+      </div>
+      <div class="widget w-caught float2" data-reveal>
+        <span>Dropouts caught</span>
+        <b><span data-count="0" id="caught">0</span><small id="caughtOf"></small></b>
+      </div>
+      <div class="widget w-spark float3" data-reveal>
+        <span>Dropout rate vs. subjects passed</span>
+        <svg id="spark" viewBox="0 0 200 60" preserveAspectRatio="none"></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<section class="marquee-wrap">
+  <p class="center-note" data-reveal>Everything a student-support team needs, in one place</p>
+  <div class="marquee"><div class="track" id="marquee"></div></div>
+</section>
+
+<main>
+<!-- INTRO + BENTO -->
+<section class="wrap split2" id="how">
+  <div>
+    <h2 class="big" data-split>An early-warning system <span class="soft">built for counsellors.</span></h2>
+    <p class="lead" data-reveal>Most dropouts are noticed too late. EduGuard reads the records a university
+      already keeps (grades, fees, scholarships) and flags students while there is still time to help.</p>
+    <div class="cta" data-reveal>
+      <a class="btn solid" href="checker.html">Check a student <span class="arr">→</span></a>
+      <a class="btn" href="analysis.html">See insights</a>
+    </div>
+  </div>
+  <div class="bento">
+    <a class="tile mist" href="models.html" data-reveal>
+      <h3>Predict <span class="soft">in seconds</span></h3>
+      <div class="tile-num"><span data-count="0" id="accNum">0</span>%</div>
+      <p>of predictions correct when tested on new students</p>
+    </a>
+    <a class="tile dark" href="dashboard.html" data-reveal>
+      <h3>Explain <span class="soft">every score</span></h3>
+      <div class="chips"><span class="chip up">▲ Fees unpaid</span><span class="chip down">▼ 6 subjects passed</span><span class="chip up">▲ Owes money</span></div>
+      <p>Each result lists the inputs that raised or lowered the risk.</p>
+    </a>
+  </div>
+</section>
+
+<!-- THREE STEPS -->
+<section class="wrap">
+  <div class="row-head">
+    <h2 class="big" data-split>From raw records to a <span class="soft">support plan.</span></h2>
+    <a class="btn" href="models.html" data-reveal>How accurate is it? <span class="arr">→</span></a>
+  </div>
+  <div class="steps">
+    <a class="step s1" href="analysis.html" data-reveal>
+      <span class="num">01</span><h3>Learn</h3>
+      <div class="chips"><span class="chip">Grades</span><span class="chip">Fees</span><span class="chip">Scholarship</span><span class="chip">Age</span><span class="chip">Subjects passed</span></div>
+      <p>Learns warning signs from thousands of past student records.</p>
+    </a>
+    <a class="step s2" href="dashboard.html" data-reveal>
+      <span class="num">02</span><h3>Classify</h3>
+      <div class="tier-stack" id="tierStack"></div>
+      <p>Every student is sorted into a clear risk tier.</p>
+    </a>
+    <a class="step s3" href="checker.html" data-reveal>
+      <span class="num">03</span><h3>Counsel</h3>
+      <div class="mini-tip">Fees not up to date → refer to financial aid.</div>
+      <div class="neigh"><i class="d"></i><i class="d"></i><i class="d"></i><i></i><i></i></div>
+      <p>Each flag comes with a suggested next step.</p>
+    </a>
+  </div>
+</section>
+
+<!-- QUICK CHECK (calculator) -->
+<section class="wrap split2 calc-sec">
+  <div>
+    <h2 class="big" data-split>One score. <span class="soft">Clear reasons.</span></h2>
+    <p class="lead" data-reveal>Move the slider and watch the risk change. This is the same model the
+      counsellor dashboard uses, running privately in your browser.</p>
+    <div class="cta" data-reveal><a class="btn solid" href="checker.html">Open the full checker <span class="arr">→</span></a></div>
+  </div>
+  <div class="calc" data-reveal>
+    <div class="calc-h"><b>Quick check</b><span class="hint-d">typical student, change 3 things</span></div>
+    <label class="calc-row"><span>Semester-2 subjects passed <b id="qPassV"></b></span>
+      <input type="range" id="qPass" min="0" max="10" step="1" value="5"></label>
+    <div class="calc-row two">
+      <span>Fees paid on time?</span>
+      <div class="seg" id="qFees"><button data-v="1" class="on">Yes</button><button data-v="0">No</button></div>
+    </div>
+    <div class="calc-row two">
+      <span>Has a scholarship?</span>
+      <div class="seg" id="qSch"><button data-v="1">Yes</button><button data-v="0" class="on">No</button></div>
+    </div>
+    <div class="calc-out">
+      <span>Dropout risk</span>
+      <div class="calc-big"><span id="qRisk">0%</span><span id="qTier"></span></div>
+      <div class="calc-bar"><i id="qBar"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="wrap statement">
+  <p data-scrub>Every term, some students quietly fall behind. EduGuard answers the two questions every counsellor asks: who needs help first, and what will actually help?</p>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <h2 class="big" data-split>See who needs <span class="soft">help first.</span></h2>
+  <p data-reveal>Open the counsellor dashboard to see every student by risk tier, or check a single student in four short steps.</p>
+  <div class="cta center" data-reveal>
+    <a class="btn solid" href="dashboard.html">Open dashboard <span class="arr">→</span></a>
+    <a class="btn" href="checker.html">Check a student</a>
+  </div>
+</section>
+</main>
+
+<script src="web/model.js"></script>
+<script src="ui/common.js"></script>
+<script src="ui/overview.js"></script>
+</body>
+</html>

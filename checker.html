@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check a Student · EduGuard</title>
+<meta name="description" content="Enter a student's details and get their Red / Yellow / Green risk tier, the reasons and suggested support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/base.css">
+<link rel="stylesheet" href="ui/checker.css">
+<script src="web/data.js"></script>
+</head>
+<body data-page="checker">
+<main class="page">
+
+  <header class="phead">
+    <div>
+      <span class="mono">Check a student</span>
+      <h1>Is this student at risk?</h1>
+      <p>Answer four short steps and get a risk tier, the reasons behind it, and a suggested next step.</p>
+    </div>
+  </header>
+
+  <!-- step-by-step form -->
+  <div class="wizard" id="wizard">
+    <aside class="rail" id="rail"></aside>
+    <form class="pane" id="form" novalidate></form>
+  </div>
+
+  <!-- result (shown after "Check risk") -->
+  <div class="result" id="result" hidden>
+    <div class="res-top">
+      <div class="res-score card dark">
+        <span class="mono">Dropout risk</span>
+        <div class="score"><span class="big" id="big"></span><span id="tier"></span></div>
+        <p class="sentence" id="sentence"></p>
+        <div class="scale"><div class="track"></div><div class="dot" id="dot"></div>
+          <div class="ticks"><span>0%</span><span>Green</span><span>33%</span><span>Yellow</span><span>66%</span><span>Red</span><span>100%</span></div></div>
+        <p class="compare" id="compare"></p>
+      </div>
+      <div class="card res-next">
+        <span class="mono">Suggested support</span>
+        <div id="tips"></div>
+        <div class="neigh-row"><div class="neigh" id="neigh"></div><p class="hint" id="neighTxt"></p></div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Main reasons</h3>
+        <p class="hint">Compared with a typical student, these answers moved the risk most.</p>
+        <ul class="reasons" id="reasons"></ul>
+      </div>
+      <details class="card how">
+        <summary>How is this calculated? <span class="mono">show</span></summary>
+        <ol id="how"></ol>
+      </details>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn" id="edit">← Edit answers</button>
+      <button type="button" class="btn" id="again">Check another student</button>
+      <button type="button" class="btn solid" id="pdf">Download brief (PDF) <span class="arr">↓</span></button>
+    </div>
+    <p class="note">Decision support only. A counsellor reviews every case; the estimate can be wrong
+      and must never be used to penalise a student.</p>
+  </div>
+
+</main>
+<script src="web/model.js"></script>
+<script src="ui/common.js"></script>
+<script src="ui/checker.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accuracy · EduGuard</title>
+<meta name="description" content="How reliable EduGuard's risk estimates are, tested on students it had never seen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ui/base.css">
+<link rel="stylesheet" href="ui/report.css">
+<script src="web/data.js"></script>
+</head>
+<body data-page="models">
+<main class="page">
+
+  <header class="phead">
+    <div>
+      <span class="mono">Accuracy</span>
+      <h1>How reliable is it?</h1>
+      <p id="lead"></p>
+    </div>
+  </header>
+
+  <section class="band" data-reveal>
+    <span class="lbl">Tested on new students</span>
+    <h2>It catches most students before they leave, and every flag is checked by a person.</h2>
+    <p id="kpis"></p>
+  </section>
+
+  <section class="sec-gap">
+    <div class="sec-head"><h2>Out of every <span class="soft">100 students…</span></h2>
+      <p>What EduGuard would have done for the students it was tested on.</p></div>
+    <div class="grid2">
+      <div class="card dots-card" data-reveal><span class="mono">…who later dropped out</span>
+        <div class="big" id="caughtBig"></div><p class="hint">were flagged in advance</p>
+        <div class="dots100" id="dotsDrop"></div>
+        <div class="dots-key"><span><i style="background:var(--lime-dark)"></i>Flagged in time</span><span><i style="background:var(--line)"></i>Missed</span></div></div>
+      <div class="card dots-card" data-reveal><span class="mono">…who stayed</span>
+        <div class="big" id="clearBig"></div><p class="hint">were correctly left alone</p>
+        <div class="dots100" id="dotsStay"></div>
+        <div class="dots-key"><span><i style="background:var(--lime-dark)"></i>Correctly not flagged</span><span><i style="background:var(--accent)"></i>Flagged as a precaution</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec-gap">
+    <div class="sec-head"><h2>The full <span class="soft">test results.</span></h2>
+      <p>Rows show what really happened; columns show what EduGuard predicted.</p></div>
+    <div class="split-2">
+      <div class="card" data-reveal><div class="cm" id="cm"></div></div>
+      <div class="band" data-reveal>
+        <span class="lbl">Why it leans towards flagging</span>
+        <p style="margin-top:12px">Missing a student who needs help is worse than a false alarm. EduGuard is tuned to catch
+          as many at-risk students as possible; a precautionary flag only costs a short conversation.</p>
+        <p id="cmTake"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-gap">
+    <div class="sec-head"><h2>What drives <span class="soft">the risk score.</span></h2>
+      <p>The details that move a student's risk the most, from strongest down.</p></div>
+    <div class="drivers" id="drivers"></div>
+  </section>
+
+</main>
+<script src="ui/common.js"></script>
+<script src="ui/models.js"></script>
+</body>
+</html>
