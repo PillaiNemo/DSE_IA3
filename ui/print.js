@@ -93,8 +93,9 @@ function summaryReport() {
 }
 
 /* ---------- 2. one-page brief for one student ---------- */
-function studentReport(id, values, risk, tier) {
+function studentReport(id, values, risk, tier, groups) {
   const res = predictRisk(values), near = similarStudents(values, 5), tips = getSuggestions(values, near);
+  const bgTips = groups ? backgroundSupport(groups, values["Age at enrollment"]).slice(0, 1) : [];  // keeps the brief to one page
   const k = near.reduce((a, b) => a + b, 0);
   const asked = ["Tuition fees up to date", "Debtor", "Scholarship holder", "Age at enrollment", "Admission grade",
     "Curricular units 1st sem (approved)", "Curricular units 1st sem (grade)", "Curricular units 2nd sem (approved)", "Curricular units 2nd sem (grade)"];
@@ -115,7 +116,7 @@ function studentReport(id, values, risk, tier) {
     <section class="r-sec two">
       <div><h2>Why this score</h2><ul class="why-r">${reasons.map(([f, c]) =>
         `<li><span class="${c > 0 ? "up" : "down"}">${c > 0 ? "▲" : "▼"}</span>${nice(f)}: <b>${showValue(f, v[f])}</b> ${c > 0 ? "raises" : "lowers"} the risk</li>`).join("")}</ul></div>
-      <div><h2>Suggested support</h2>${tips.map(t => `<div class="r-tip">${t}</div>`).join("")}</div>
+      <div><h2>Suggested support</h2>${tips.concat(bgTips).map(t => `<div class="r-tip">${t}</div>`).join("")}</div>
     </section>
 
     <section class="r-sec"><h2>Meeting notes</h2><div class="lines">${"<div></div>".repeat(4)}</div>
@@ -128,12 +129,16 @@ function studentReport(id, values, risk, tier) {
 let html;
 if (params.get("student")) {
   const s = students.find(x => x.id === params.get("student"));
-  html = s ? studentReport(s.id, s.values, s.risk, s.tier) : "<p>Student not found.</p>";
+  const groups = s && Object.fromEntries(Object.keys(BG).filter(f => BG[f].groups && BG[f].groups[0].codes)
+    .map(f => [f, (backgroundGroup(f, s.values[f]) || {}).label]));
+  html = s ? studentReport(s.id, s.values, s.risk, s.tier, groups) : "<p>Student not found.</p>";
   $("toolTitle").textContent = `Student brief · ${params.get("student")}`;
 } else if (params.get("type") === "check") {
   let st = null;
-  try { st = JSON.parse(sessionStorage.getItem("eduguardCheck")); } catch (e) { st = null; }
-  if (st) { const p = predictRisk(st).probability; html = studentReport("New student", st, p, riskTier(p)); }
+  let groups = null;
+  try { st = JSON.parse(sessionStorage.getItem("eduguardCheck")); groups = JSON.parse(sessionStorage.getItem("eduguardCheckGroups")); }
+  catch (e) { st = null; }
+  if (st) { const p = predictRisk(st).probability; html = studentReport("New student", st, p, riskTier(p), groups); }
   else html = "<p>No checked student found. Run a check first on the Check a student page.</p>";
   $("toolTitle").textContent = "Student brief · from Check a student";
   $("back").href = "checker.html";

@@ -163,12 +163,15 @@ const SHORT = {
   "Curricular units 2nd sem (approved)": "Sem 2 subjects passed", "Curricular units 2nd sem (grade)": "Sem 2 average grade",
   "Curricular units 1st sem (credited)": "Sem 1 subjects credited", "Curricular units 2nd sem (credited)": "Sem 2 subjects credited",
   "Curricular units 1st sem (evaluations)": "Sem 1 evaluations", "Curricular units 2nd sem (evaluations)": "Sem 2 evaluations",
-  "Tuition fees up to date": "Fees up to date", "Age at enrollment": "Age at enrolment", "Scholarship holder": "Scholarship"
+  "Tuition fees up to date": "Fees up to date", "Age at enrollment": "Age at enrolment", "Scholarship holder": "Scholarship",
+  "Previous qualification (grade)": "Previous qualification grade", "Displaced": "Lives away from home",
+  "Educational special needs": "Special needs", "Daytime/evening attendance": "Attendance"
 };
 const nice = f => SHORT[f] || f;
-const YESNO = ["Tuition fees up to date", "Debtor", "Scholarship holder", "Displaced", "International"];
+const YESNO = ["Tuition fees up to date", "Debtor", "Scholarship holder", "Displaced", "International", "Educational special needs"];
 function showValue(f, v) {
   if (f === "Gender") return v === 1 ? "Male" : "Female";
+  if (f === "Daytime/evening attendance") return v === 1 ? "Daytime" : "Evening";
   if (YESNO.includes(f)) return v === 1 ? "Yes" : "No";
   return Number.isInteger(v) ? v : (+v).toFixed(1);
 }
@@ -194,6 +197,55 @@ function neighbourDots(outcomes) {
 if (window.Chart) {
   Chart.defaults.font.family = "Inter"; Chart.defaults.color = INK3;
   Chart.defaults.animation.duration = REDUCED ? 0 : 1200; Chart.defaults.animation.easing = "easeOutQuart";
+}
+
+/* ---------- per-student charts (checker + dashboard) ---------- */
+// Friendly names for the family / background columns.
+const BG_TITLE = {
+  "Previous qualification": "Previous qualification", "Course": "Course", "Application mode": "Entry route",
+  "Mother's qualification": "Mother's education", "Father's qualification": "Father's education",
+  "Mother's occupation": "Mother's job", "Father's occupation": "Father's job", "Marital status": "Marital status",
+  "Nacionality": "Nationality", "Daytime/evening attendance": "Attendance", "Displaced": "Lives away from home",
+  "Educational special needs": "Special needs", "Age at enrollment": "Age group"
+};
+// Replace any chart already on this canvas (results can be redrawn).
+function makeChart(canvas, cfg) {
+  const old = Chart.getChart(canvas);
+  if (old) old.destroy();
+  return new Chart(canvas, cfg);
+}
+const pctAxis = { min: 0, max: 1, ticks: { callback: v => pct(v, 0) }, grid: { color: LINE } };
+
+// What moved the risk: the largest contributions (weight x scaled value).
+function contribChart(canvas, contributions, student, only, n = 8) {
+  const top = contributions.filter(c => !only || only.includes(c[0]))
+    .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, n);
+  return makeChart(canvas, { type: "bar",
+    data: { labels: top.map(([f]) => `${nice(f)}: ${showValue(f, student[f])}`),
+      datasets: [{ data: top.map(c => c[1]), backgroundColor: top.map(c => c[1] > 0 ? ACC : OK), borderRadius: 5 }] },
+    options: { indexAxis: "y", maintainAspectRatio: false, plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: c => c.raw > 0 ? "raises the risk" : "lowers the risk" } } },
+      scales: { x: { grid: { color: LINE }, ticks: { display: false },
+          title: { display: true, text: "◀ lowers risk        raises risk ▶" } },
+        y: { grid: { display: false }, ticks: { font: { size: 11 } } } } } });
+}
+
+// Dropout rate of past students in the same background groups as this student.
+// rows = [[title, group]] where group = { label, n, rate }.
+function backgroundChart(canvas, rows) {
+  const all = [["All students", { label: "", rate: OVERALL }]].concat(rows);
+  return makeChart(canvas, { type: "bar",
+    data: { labels: all.map(([t, g]) => g.label ? [t, g.label] : t),      // two-line labels
+      datasets: [{ data: all.map(r => r[1].rate), borderRadius: 5,
+        backgroundColor: all.map((r, i) => i === 0 ? GREY : r[1].rate > OVERALL + .05 ? ACC : r[1].rate < OVERALL - .05 ? OK : INK) }] },
+    options: { indexAxis: "y", maintainAspectRatio: false, plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: c => `${pct(c.raw, 0)} dropped out` + (all[c.dataIndex][1].n ? ` (${all[c.dataIndex][1].n} students)` : "") } } },
+      scales: { x: pctAxis, y: { grid: { display: false }, ticks: { font: { size: 11 } } } } } });
+}
+
+// Background groups for a full student record (coded values), e.g. a dashboard student.
+function backgroundRows(v, fields) {
+  return fields.map(f => [BG_TITLE[f], f === "Age at enrollment" ? ageGroup(v[f]) : backgroundGroup(f, v[f])]);
 }
 document.addEventListener("DOMContentLoaded", () => {
   // Inner pages: let the header and every card glide in.

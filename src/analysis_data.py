@@ -1,8 +1,9 @@
 """Exploring the data: Modules 2, 3 and 4 (regression and clustering).
 
 Descriptive statistics, group/filter/sort, plots, confidence interval, t-test,
-chi-square test, multiple vs polynomial regression, K-means and agglomerative
-clustering. Run:  python src/analysis_data.py
+chi-square test, family/background factors (group rates + chi-square),
+multiple vs polynomial regression, K-means and agglomerative clustering.
+Run:  python src/analysis_data.py
 Saves figures to reports/figures/ and numbers to reports/results.json
 """
 import sys
@@ -23,7 +24,8 @@ from sklearn.pipeline import make_pipeline  # noqa: E402
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler  # noqa
 
 sys.path.append(str(Path(__file__).resolve().parent))
-from data_utils import RANDOM_STATE, REPORT_DIR, load_data, save_results  # noqa
+from data_utils import (BACKGROUND, COURSES, RANDOM_STATE, REPORT_DIR,  # noqa
+                        background_group, load_data, save_results)
 
 FIG = REPORT_DIR / "figures"
 S1A, S1G = "Curricular units 1st sem (approved)", "Curricular units 1st sem (grade)"
@@ -117,6 +119,66 @@ def inference(df):
             "chi2_p": f"{pc:.1e}"}
 
 
+AGE_BINS, AGE_LABELS = [0, 19, 24, 34, 200], ["17-19", "20-24", "25-34", "35+"]
+
+
+def group_test(df, groups):
+    """Chi-square test of independence (group vs Dropout) and Cramer's V.
+
+    Groups with fewer than 20 students are left out of the test, because
+    chi-square needs expected counts of about 5 or more in every cell.
+    """
+    keep = groups.map(groups.value_counts()) >= 20
+    table = pd.crosstab(groups[keep], df.loc[keep, "Dropout"])
+    chi2, p, dof, _ = stats.chi2_contingency(table)
+    return {"chi2": round(chi2, 1), "dof": int(dof), "p": f"{p:.1e}",
+            "significant": bool(p < 0.05),
+            "cramers_v": round(float(np.sqrt(chi2 / table.values.sum())), 3)}
+
+
+def background(df):
+    """Family and background factors: dropout rate per group + chi-square test."""
+    out = {}
+    for col, defs in BACKGROUND.items():
+        groups = df[col].map(lambda c: background_group(col, c))
+        rates = df.groupby(groups)["Dropout"].agg(["size", "mean"])
+        out[col] = {"groups": [{"label": label, "codes": codes,
+                                "n": int(rates.loc[label, "size"]) if label in rates.index else 0,
+                                "rate": round(float(rates.loc[label, "mean"]), 4) if label in rates.index else None}
+                               for label, codes in defs],
+                    "test": group_test(df, groups)}
+    ages = pd.cut(df["Age at enrollment"], AGE_BINS, labels=AGE_LABELS).astype(str)
+    rates = df.groupby(ages)["Dropout"].agg(["size", "mean"])
+    out["Age at enrollment"] = {"bins": AGE_BINS,
+                                "groups": [{"label": a, "n": int(rates.loc[a, "size"]),
+                                            "rate": round(float(rates.loc[a, "mean"]), 4)} for a in AGE_LABELS],
+                                "test": group_test(df, ages)}
+    course = df.groupby("Course")["Dropout"].agg(["size", "mean"]).sort_values("mean")
+    out["Course"] = {"groups": [{"label": COURSES[c], "codes": [int(c)], "n": int(r["size"]),
+                                 "rate": round(float(r["mean"]), 4)} for c, r in course.iterrows()],
+                     "test": group_test(df, df["Course"])}
+    # Average results of students who stayed vs dropped out (for comparison charts).
+    cols = [S1A, S2A, S1G, S2G, "Curricular units 1st sem (enrolled)", "Admission grade"]
+    out["means_by_outcome"] = {k: {c: round(float(v), 2) for c, v in row.items()}
+                               for k, row in df.groupby(df["Dropout"].map({0: "stayed", 1: "dropped"}))[cols].mean().iterrows()}
+
+    # Figure: dropout rate by six background factors.
+    show = ["Previous qualification", "Mother's qualification", "Father's occupation",
+            "Marital status", "Application mode", "Daytime/evening attendance"]
+    fig, axes = plt.subplots(2, 3, figsize=(12, 6.5))
+    for ax, col in zip(axes.flat, show):
+        g = [x for x in out[col]["groups"] if x["n"] >= 20]
+        ax.barh([x["label"] for x in g], [x["rate"] for x in g], color=INK)
+        ax.axvline(df["Dropout"].mean(), ls="--", color=ACC, lw=1)
+        ax.set_title(col, fontsize=10)
+        ax.set_xlim(0, 1)
+        ax.tick_params(labelsize=7)
+    fig.supxlabel("Dropout rate (dashed line = overall 32%)", fontsize=9)
+    save("eda_background_rates.png")
+    print("Background tests:", {k: v["test"]["p"] for k, v in out.items() if "test" in v})
+    return out
+
+
 def regression(df):
     """Module 4: predict semester-2 grade, linear vs polynomial (degree 2)."""
     X, y = df[[S1G, S1A]], df[S2G]
@@ -178,6 +240,7 @@ def main():
     FIG.mkdir(parents=True, exist_ok=True)
     df = load_data()
     save_results("data", {"explore": explore(df), "inference": inference(df),
+                          "background": background(df),
                           "regression": regression(df),
                           "clusters": clustering(df)})
     print("Saved figures and reports/results.json")

@@ -63,6 +63,11 @@
 .why li:first-child{border-top:none}
 .why li b{color:var(--ink)}
 .m-sec .tip{margin:6px 0;font-size:.88rem}
+.m-sec .tip.bg{border-left-color:var(--mid)}
+.m-charts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.m-charts h4{font-family:var(--display);font-size:.95rem;font-weight:600;margin:0 0 6px}
+.m-chart{position:relative;height:440px}
+@media (max-width:760px){ .m-charts{grid-template-columns:1fr} }
 .m-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
 .m-foot .btns{display:flex;gap:8px;flex-wrap:wrap}
 body.locked{overflow:hidden}

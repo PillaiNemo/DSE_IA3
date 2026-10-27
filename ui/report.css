@@ -35,6 +35,26 @@
 .signal .big-x small{font-size:.8rem;font-weight:500;color:var(--ink2);letter-spacing:0}
 .split-2{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
 
+/* family and background (Insights) */
+.vs.wide{gap:10px}
+.vs.wide .r{grid-template-columns:1fr 64px 40px}
+.vs.wide .r span{line-height:1.25}
+.vs.wide .r small{display:block;font-size:.7rem;color:var(--ink3)}
+.bg-kpis{grid-template-columns:repeat(3,1fr);margin-top:16px}
+.bg-kpis div{background:var(--accent-soft);border-color:transparent}
+.bg-kpis b{color:var(--accent)}
+.bg-kpis span{color:var(--ink2)}
+.course-chart{height:440px}
+.tests{width:100%;border-collapse:collapse;margin-top:12px;font-size:.82rem}
+.tests th{text-align:left;font-weight:600;color:var(--ink3);font-size:.72rem;padding:6px 6px;border-bottom:1px solid var(--line)}
+.tests td{padding:7px 6px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.tests td.yes{color:var(--ok);font-weight:600}
+.tests td.no{color:var(--ink3)}
+.tests td.nw{white-space:nowrap}
+.split-2.even{grid-template-columns:1fr 1fr}
+@media (max-width:1000px){ .split-2.even{grid-template-columns:1fr} }
+@media (max-width:1000px){ .bg-kpis{grid-template-columns:1fr} }
+
 /* profiles */
 .share{display:flex;height:16px;border-radius:99px;overflow:hidden;gap:3px;margin:6px 0 18px}
 .share i{display:block}

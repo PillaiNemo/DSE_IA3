@@ -91,6 +91,795 @@
    "chi2_dof": 1,
    "chi2_p": "1.3e-59"
   },
+  "background": {
+   "Previous qualification": {
+    "groups": [
+     {
+      "label": "Finished 12th",
+      "codes": [
+       1
+      ],
+      "n": 3717,
+      "rate": 0.29
+     },
+     {
+      "label": "Did not finish 12th",
+      "codes": [
+       9,
+       10,
+       12,
+       14,
+       15,
+       19,
+       38
+      ],
+      "n": 232,
+      "rate": 0.6422
+     },
+     {
+      "label": "Technical course",
+      "codes": [
+       39,
+       42
+      ],
+      "n": 255,
+      "rate": 0.2941
+     },
+     {
+      "label": "Already studied at university",
+      "codes": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       40,
+       43
+      ],
+      "n": 220,
+      "rate": 0.5409
+     }
+    ],
+    "test": {
+     "chi2": 175.8,
+     "dof": 3,
+     "p": "7.1e-38",
+     "significant": true,
+     "cramers_v": 0.199
+    }
+   },
+   "Mother's qualification": {
+    "groups": [
+     {
+      "label": "Degree or higher",
+      "codes": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       40,
+       41,
+       43,
+       44
+      ],
+      "n": 615,
+      "rate": 0.3008
+     },
+     {
+      "label": "Finished 12th or technical course",
+      "codes": [
+       1,
+       13,
+       18,
+       20,
+       22,
+       31,
+       33,
+       39,
+       42
+      ],
+      "n": 1083,
+      "rate": 0.2835
+     },
+     {
+      "label": "Did not finish 12th",
+      "codes": [
+       9,
+       10,
+       11,
+       12,
+       14,
+       19,
+       25,
+       26,
+       27,
+       29,
+       30,
+       35,
+       36,
+       37,
+       38
+      ],
+      "n": 2596,
+      "rate": 0.3209
+     },
+     {
+      "label": "Not known",
+      "codes": [
+       34
+      ],
+      "n": 130,
+      "rate": 0.7385
+     }
+    ],
+    "test": {
+     "chi2": 112.1,
+     "dof": 3,
+     "p": "4.0e-24",
+     "significant": true,
+     "cramers_v": 0.159
+    }
+   },
+   "Father's qualification": {
+    "groups": [
+     {
+      "label": "Degree or higher",
+      "codes": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       40,
+       41,
+       43,
+       44
+      ],
+      "n": 419,
+      "rate": 0.3413
+     },
+     {
+      "label": "Finished 12th or technical course",
+      "codes": [
+       1,
+       13,
+       18,
+       20,
+       22,
+       31,
+       33,
+       39,
+       42
+      ],
+      "n": 934,
+      "rate": 0.3191
+     },
+     {
+      "label": "Did not finish 12th",
+      "codes": [
+       9,
+       10,
+       11,
+       12,
+       14,
+       19,
+       25,
+       26,
+       27,
+       29,
+       30,
+       35,
+       36,
+       37,
+       38
+      ],
+      "n": 2959,
+      "rate": 0.3038
+     },
+     {
+      "label": "Not known",
+      "codes": [
+       34
+      ],
+      "n": 112,
+      "rate": 0.7232
+     }
+    ],
+    "test": {
+     "chi2": 87.9,
+     "dof": 3,
+     "p": "6.1e-19",
+     "significant": true,
+     "cramers_v": 0.141
+    }
+   },
+   "Mother's occupation": {
+    "groups": [
+     {
+      "label": "Manager or professional",
+      "codes": [
+       1,
+       2,
+       3
+      ],
+      "n": 789,
+      "rate": 0.3029
+     },
+     {
+      "label": "Office, sales or services",
+      "codes": [
+       4,
+       5
+      ],
+      "n": 1371,
+      "rate": 0.2947
+     },
+     {
+      "label": "Farming, trade or machines",
+      "codes": [
+       6,
+       7,
+       8
+      ],
+      "n": 406,
+      "rate": 0.3005
+     },
+     {
+      "label": "Unskilled work",
+      "codes": [
+       9
+      ],
+      "n": 1623,
+      "rate": 0.3031
+     },
+     {
+      "label": "Armed forces",
+      "codes": [
+       10
+      ],
+      "n": 4,
+      "rate": 0.25
+     },
+     {
+      "label": "Student",
+      "codes": [
+       0
+      ],
+      "n": 144,
+      "rate": 0.6875
+     },
+     {
+      "label": "Other or not known",
+      "codes": [
+       90,
+       99
+      ],
+      "n": 87,
+      "rate": 0.7356
+     }
+    ],
+    "test": {
+     "chi2": 166.0,
+     "dof": 5,
+     "p": "5.2e-34",
+     "significant": true,
+     "cramers_v": 0.194
+    }
+   },
+   "Father's occupation": {
+    "groups": [
+     {
+      "label": "Manager or professional",
+      "codes": [
+       1,
+       2,
+       3
+      ],
+      "n": 731,
+      "rate": 0.3187
+     },
+     {
+      "label": "Office, sales or services",
+      "codes": [
+       4,
+       5
+      ],
+      "n": 919,
+      "rate": 0.3134
+     },
+     {
+      "label": "Farming, trade or machines",
+      "codes": [
+       6,
+       7,
+       8
+      ],
+      "n": 1255,
+      "rate": 0.2765
+     },
+     {
+      "label": "Unskilled work",
+      "codes": [
+       9
+      ],
+      "n": 1034,
+      "rate": 0.3153
+     },
+     {
+      "label": "Armed forces",
+      "codes": [
+       10
+      ],
+      "n": 273,
+      "rate": 0.315
+     },
+     {
+      "label": "Student",
+      "codes": [
+       0
+      ],
+      "n": 128,
+      "rate": 0.6406
+     },
+     {
+      "label": "Other or not known",
+      "codes": [
+       90,
+       99
+      ],
+      "n": 84,
+      "rate": 0.7024
+     }
+    ],
+    "test": {
+     "chi2": 127.9,
+     "dof": 6,
+     "p": "3.6e-25",
+     "significant": true,
+     "cramers_v": 0.17
+    }
+   },
+   "Marital status": {
+    "groups": [
+     {
+      "label": "Single",
+      "codes": [
+       1
+      ],
+      "n": 3919,
+      "rate": 0.3021
+     },
+     {
+      "label": "Married or partner",
+      "codes": [
+       2,
+       5
+      ],
+      "n": 404,
+      "rate": 0.4703
+     },
+     {
+      "label": "Divorced, separated or widowed",
+      "codes": [
+       3,
+       4,
+       6
+      ],
+      "n": 101,
+      "rate": 0.4653
+     }
+    ],
+    "test": {
+     "chi2": 57.4,
+     "dof": 2,
+     "p": "3.5e-13",
+     "significant": true,
+     "cramers_v": 0.114
+    }
+   },
+   "Nacionality": {
+    "groups": [
+     {
+      "label": "Local",
+      "codes": [
+       1
+      ],
+      "n": 4314,
+      "rate": 0.322
+     },
+     {
+      "label": "International",
+      "codes": [
+       2,
+       6,
+       11,
+       13,
+       14,
+       17,
+       21,
+       22,
+       24,
+       25,
+       26,
+       32,
+       41,
+       62,
+       100,
+       101,
+       103,
+       105,
+       108,
+       109
+      ],
+      "n": 110,
+      "rate": 0.2909
+     }
+    ],
+    "test": {
+     "chi2": 0.3,
+     "dof": 1,
+     "p": "5.6e-01",
+     "significant": false,
+     "cramers_v": 0.009
+    }
+   },
+   "Application mode": {
+    "groups": [
+     {
+      "label": "First admission round",
+      "codes": [
+       1,
+       5,
+       16
+      ],
+      "n": 1762,
+      "rate": 0.1998
+     },
+     {
+      "label": "Later admission round",
+      "codes": [
+       17,
+       18
+      ],
+      "n": 996,
+      "rate": 0.3022
+     },
+     {
+      "label": "Mature entry (over 23)",
+      "codes": [
+       39
+      ],
+      "n": 785,
+      "rate": 0.5541
+     },
+     {
+      "label": "Transfer or change of course",
+      "codes": [
+       42,
+       43,
+       51,
+       57
+      ],
+      "n": 449,
+      "rate": 0.3764
+     },
+     {
+      "label": "Already holds a diploma",
+      "codes": [
+       7,
+       44,
+       53
+      ],
+      "n": 387,
+      "rate": 0.3928
+     },
+     {
+      "label": "Other special route",
+      "codes": [
+       2,
+       10,
+       15,
+       26,
+       27
+      ],
+      "n": 45,
+      "rate": 0.2667
+     }
+    ],
+    "test": {
+     "chi2": 332.1,
+     "dof": 5,
+     "p": "1.2e-69",
+     "significant": true,
+     "cramers_v": 0.274
+    }
+   },
+   "Daytime/evening attendance": {
+    "groups": [
+     {
+      "label": "Daytime",
+      "codes": [
+       1
+      ],
+      "n": 3941,
+      "rate": 0.308
+     },
+     {
+      "label": "Evening",
+      "codes": [
+       0
+      ],
+      "n": 483,
+      "rate": 0.4286
+     }
+    ],
+    "test": {
+     "chi2": 28.1,
+     "dof": 1,
+     "p": "1.1e-07",
+     "significant": true,
+     "cramers_v": 0.08
+    }
+   },
+   "Displaced": {
+    "groups": [
+     {
+      "label": "Lives at home",
+      "codes": [
+       0
+      ],
+      "n": 1998,
+      "rate": 0.3764
+     },
+     {
+      "label": "Lives away from home",
+      "codes": [
+       1
+      ],
+      "n": 2426,
+      "rate": 0.2758
+     }
+    ],
+    "test": {
+     "chi2": 50.4,
+     "dof": 1,
+     "p": "1.2e-12",
+     "significant": true,
+     "cramers_v": 0.107
+    }
+   },
+   "Educational special needs": {
+    "groups": [
+     {
+      "label": "No",
+      "codes": [
+       0
+      ],
+      "n": 4373,
+      "rate": 0.3211
+     },
+     {
+      "label": "Yes",
+      "codes": [
+       1
+      ],
+      "n": 51,
+      "rate": 0.3333
+     }
+    ],
+    "test": {
+     "chi2": 0.0,
+     "dof": 1,
+     "p": "9.7e-01",
+     "significant": false,
+     "cramers_v": 0.001
+    }
+   },
+   "Age at enrollment": {
+    "bins": [
+     0,
+     19,
+     24,
+     34,
+     200
+    ],
+    "groups": [
+     {
+      "label": "17-19",
+      "n": 1952,
+      "rate": 0.2095
+     },
+     {
+      "label": "20-24",
+      "n": 1334,
+      "rate": 0.2856
+     },
+     {
+      "label": "25-34",
+      "n": 697,
+      "rate": 0.5653
+     },
+     {
+      "label": "35+",
+      "n": 441,
+      "rate": 0.5374
+     }
+    ],
+    "test": {
+     "chi2": 404.4,
+     "dof": 3,
+     "p": "2.5e-87",
+     "significant": true,
+     "cramers_v": 0.302
+    }
+   },
+   "Course": {
+    "groups": [
+     {
+      "label": "Nursing",
+      "codes": [
+       9500
+      ],
+      "n": 766,
+      "rate": 0.154
+     },
+     {
+      "label": "Social Service",
+      "codes": [
+       9238
+      ],
+      "n": 355,
+      "rate": 0.1831
+     },
+     {
+      "label": "Communication Design",
+      "codes": [
+       9070
+      ],
+      "n": 226,
+      "rate": 0.2257
+     },
+     {
+      "label": "Veterinary Nursing",
+      "codes": [
+       9085
+      ],
+      "n": 337,
+      "rate": 0.2671
+     },
+     {
+      "label": "Journalism and Communication",
+      "codes": [
+       9773
+      ],
+      "n": 331,
+      "rate": 0.3051
+     },
+     {
+      "label": "Social Service (evening)",
+      "codes": [
+       8014
+      ],
+      "n": 215,
+      "rate": 0.3302
+     },
+     {
+      "label": "Management",
+      "codes": [
+       9147
+      ],
+      "n": 380,
+      "rate": 0.3526
+     },
+     {
+      "label": "Advertising and Marketing",
+      "codes": [
+       9670
+      ],
+      "n": 268,
+      "rate": 0.3545
+     },
+     {
+      "label": "Tourism",
+      "codes": [
+       9254
+      ],
+      "n": 252,
+      "rate": 0.381
+     },
+     {
+      "label": "Animation and Multimedia Design",
+      "codes": [
+       171
+      ],
+      "n": 215,
+      "rate": 0.3814
+     },
+     {
+      "label": "Oral Hygiene",
+      "codes": [
+       9556
+      ],
+      "n": 86,
+      "rate": 0.3837
+     },
+     {
+      "label": "Agronomy",
+      "codes": [
+       9003
+      ],
+      "n": 210,
+      "rate": 0.4095
+     },
+     {
+      "label": "Basic Education",
+      "codes": [
+       9853
+      ],
+      "n": 192,
+      "rate": 0.4427
+     },
+     {
+      "label": "Management (evening)",
+      "codes": [
+       9991
+      ],
+      "n": 268,
+      "rate": 0.5075
+     },
+     {
+      "label": "Informatics Engineering",
+      "codes": [
+       9119
+      ],
+      "n": 170,
+      "rate": 0.5412
+     },
+     {
+      "label": "Equinculture",
+      "codes": [
+       9130
+      ],
+      "n": 141,
+      "rate": 0.5532
+     },
+     {
+      "label": "Biofuel Production Technologies",
+      "codes": [
+       33
+      ],
+      "n": 12,
+      "rate": 0.6667
+     }
+    ],
+    "test": {
+     "chi2": 292.1,
+     "dof": 15,
+     "p": "2.4e-53",
+     "significant": true,
+     "cramers_v": 0.257
+    }
+   },
+   "means_by_outcome": {
+    "dropped": {
+     "Curricular units 1st sem (approved)": 2.55,
+     "Curricular units 2nd sem (approved)": 1.94,
+     "Curricular units 1st sem (grade)": 7.26,
+     "Curricular units 2nd sem (grade)": 5.9,
+     "Curricular units 1st sem (enrolled)": 5.82,
+     "Admission grade": 124.96
+    },
+    "stayed": {
+     "Curricular units 1st sem (approved)": 5.73,
+     "Curricular units 2nd sem (approved)": 5.62,
+     "Curricular units 1st sem (grade)": 12.24,
+     "Curricular units 2nd sem (grade)": 12.28,
+     "Curricular units 1st sem (enrolled)": 6.48,
+     "Admission grade": 127.93
+    }
+   }
+  },
   "regression": {
    "linear": {
     "r2": 0.712,

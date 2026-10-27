@@ -47,6 +47,23 @@
     </div>
   </section>
 
+  <!-- family and background -->
+  <section class="sec-gap">
+    <div class="sec-head"><h2>Family and background <span class="soft">matter too.</span></h2>
+      <p>Dropout rate for each group, from all past students. Red bars are clearly above the average of <b id="bgAvg"></b>.</p></div>
+    <div class="signals bg-signals" id="bgSignals"></div>
+    <div class="band-kpis bg-kpis" id="bgKpis"></div>
+    <div class="split-2 even gap">
+      <div class="card"><h3>Dropout rate by course</h3><p class="sub">Some courses lose far more students than others.</p>
+        <div class="chart course-chart"><canvas id="cCourse"></canvas></div></div>
+      <div class="card"><h3>Is the difference real?</h3>
+        <p class="sub">Chi-square test for each factor. p below 0.05 means the difference is very unlikely to be chance.
+          Cramér's V (V) shows how strong the link is (0 = none, 0.1 small, 0.3 medium).
+          Nationality and special needs show no real difference.</p>
+        <table class="tests" id="bgTests"></table></div>
+    </div>
+  </section>
+
   <!-- profiles -->
   <section class="sec-gap">
     <div class="sec-head"><h2>Three kinds of <span class="soft">students.</span></h2>

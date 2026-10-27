@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ui/base.css">
 <link rel="stylesheet" href="ui/checker.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="web/data.js"></script>
 </head>
 <body data-page="checker">
@@ -19,7 +20,7 @@
     <div>
       <span class="mono">Check a student</span>
       <h1>Is this student at risk?</h1>
-      <p>Answer four short steps and get a risk tier, the reasons behind it, and a suggested next step.</p>
+      <p>Answer six short steps (studies, family, fees and results) and get a risk tier, the reasons behind it, charts and a suggested next step.</p>
     </div>
   </header>
 
@@ -44,6 +45,31 @@
         <span class="mono">Suggested support</span>
         <div id="tips"></div>
         <div class="neigh-row"><div class="neigh" id="neigh"></div><p class="hint" id="neighTxt"></p></div>
+      </div>
+    </div>
+    <!-- charts for this student -->
+    <div class="grid2 res-charts">
+      <div class="card">
+        <h3>What moved the risk</h3>
+        <p class="hint">Each bar is one answer: red pushed the risk up, green pulled it down. Longer = stronger effect.</p>
+        <div class="chart tall"><canvas id="cContrib"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>What would lower the risk</h3>
+        <p class="hint">The risk if one thing changed, with everything else the same.</p>
+        <div class="chart tall"><canvas id="cWhat"></canvas></div>
+        <p class="takeaway" id="whatTxt"></p>
+      </div>
+      <div class="card">
+        <h3>This student vs past students</h3>
+        <p class="hint">Subjects passed and average grades (out of 20), next to the average student who stayed and who dropped out.</p>
+        <div class="chart"><canvas id="cCompare"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Students with the same background</h3>
+        <p class="hint">Dropout rate of past students in each of this student's groups. Red = clearly above average, green = clearly below.</p>
+        <div class="chart xl"><canvas id="cBg"></canvas></div>
+        <p class="takeaway" id="bgTxt"></p>
       </div>
     </div>
     <div class="grid2">

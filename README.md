@@ -17,14 +17,16 @@ UCI *Predict Students' Dropout and Academic Success* (Realinho et al., 2021):
 ## Project structure
 **1. DSE logic - explain this**
 ```
-src/data_utils.py       load data, binary target, 80/20 stratified split
+src/data_utils.py       load data, binary target, 80/20 stratified split, family/background code groups
 src/train.py            Logistic Regression, KNN, Decision Tree: tuned with 5-fold CV, compared, best saved
-src/recommender.py      cosine-similarity neighbours + support rules (Module 5)
-src/analysis_data.py    EDA, descriptive stats, CI, t-test, chi-square, regression, K-means, dendrogram
+src/recommender.py      cosine-similarity neighbours + support rules, incl. background rules (Module 5)
+src/analysis_data.py    EDA, descriptive stats, CI, t-test, chi-square, family/background factors
+                        (group dropout rates + chi-square + Cramer's V), regression, K-means, dendrogram
 src/analysis_model.py   confusion matrix, ROC, comparison, overfitting check, fairness, model weights
 src/export_web.py       packages real results + model weights into web/data.js
 web/model.js            the website's calculations: scaling, logistic regression, risk tier,
-                        cosine similarity, support rules (same as the Python code)
+                        cosine similarity, support rules (same as the Python code),
+                        background groups, what-if scenarios
 ```
 **Generated outputs (do not edit by hand)**
 ```
@@ -76,3 +78,7 @@ branch → main / (root) → Save**. The site appears at `https://<username>.git
 - Data from one university in Portugal; results may not transfer elsewhere.
 - Semester-2 grades are used, so this is a mid-course warning, not an admission-time one.
 - Support rules are written assumptions; alerts are drafts and are never sent automatically.
+- Family/background columns (parents' education and jobs, course, nationality, ...) are category
+  codes. The trained model reads them as plain numbers, so the website does not let these answers
+  change the score; it shows the dropout rate of past students in the same group instead.
+  One-hot encoding these columns and retraining would be the proper fix (future work).

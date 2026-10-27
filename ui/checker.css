@@ -44,6 +44,10 @@
 .choice{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px}
 .choice button{height:38px;border:none;border-radius:10px;background:none;font-size:.9rem;font-weight:600;cursor:pointer;color:var(--ink2);transition:background .25s,color .25s}
 .choice button.on{background:var(--olive);color:#fff}
+.sel{height:46px;width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:0 14px;
+  font:600 .92rem var(--sans,inherit);color:var(--ink);cursor:pointer}
+.sel:focus{outline:none;border-color:var(--olive)}
+.field:nth-child(5){animation-delay:.2s}.field:nth-child(6){animation-delay:.25s}.field:nth-child(7){animation-delay:.3s}.field:nth-child(8){animation-delay:.35s}
 .warn{font-size:.84rem;color:var(--accent);margin-top:12px;min-height:1.2em}
 .nav-btns{display:flex;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px}
 
@@ -63,6 +67,12 @@
 .ticks{position:absolute;top:24px;left:0;right:0;display:flex;justify-content:space-between;font-size:.66rem;color:rgba(255,255,255,.55)}
 .compare{font-size:.86rem;color:rgba(255,255,255,.7);margin-top:6px}
 .res-next .tip{font-size:.92rem}
+.tips-sub{font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin:14px 0 2px}
+.tip.bg{border-left-color:var(--mid)}
+.res-charts h3{font-family:var(--display);font-size:1.05rem;font-weight:600}
+.chart.tall{height:320px}
+.chart.xl{height:560px}
+.takeaway{font-size:.86rem;color:var(--ink2);margin-top:10px}
 .neigh-row{display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .neigh-row .neigh{margin:0}
 .how summary{cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;list-style:none;font-family:var(--display);font-size:1.05rem}
@@ -74,7 +84,7 @@
 @media (max-width:980px){
   .wizard{grid-template-columns:1fr}
   .rail{padding:22px}
-  .rail ol{grid-template-columns:repeat(5,1fr);gap:4px}
+  .rail ol{grid-template-columns:repeat(7,1fr);gap:4px}
   .rail li button{flex-direction:column;align-items:center;text-align:center;gap:6px;padding:8px 4px}
   .rail .d,.rail .foot-note{display:none}
   .rail .t{font-size:.72rem}

@@ -44,6 +44,32 @@ def rule_suggestions(s):
     return tips
 
 
+def background_suggestions(groups, age):
+    """Extra actions from family/background groups (see background() in
+    analysis_data.py). groups maps a column to its group label. Used by the
+    website's checker and dashboard (web/model.js backgroundSupport())."""
+    tips = []
+    parents = ["Mother's qualification", "Father's qualification",
+               "Mother's occupation", "Father's occupation"]
+    if groups.get("Application mode") == "Mature entry (over 23)" or age >= 25:
+        tips.append("Mature student: pair with a mature-student mentor and allow flexible deadlines.")
+    if any(groups.get(c) in ("Not known", "Other or not known", "Student") for c in parents):
+        tips.append("Family details are missing or unusual: update the record at the next meeting.")
+    if groups.get("Previous qualification") == "Did not finish 12th":
+        tips.append("Did not finish 12th: offer a bridge course in core subjects.")
+    if groups.get("Previous qualification") == "Already studied at university":
+        tips.append("Studied at university before: check that this course is the right fit.")
+    if groups.get("Daytime/evening attendance") == "Evening":
+        tips.append("Evening student: share recorded lectures and evening office hours.")
+    if groups.get("Marital status", "Single") != "Single":
+        tips.append("May have family responsibilities: discuss a flexible timetable.")
+    if groups.get("Educational special needs") == "Yes":
+        tips.append("Special educational needs: refer to the accessibility support office.")
+    if groups.get("Nacionality") == "International":
+        tips.append("International student: connect with the international-student office.")
+    return tips[:2]
+
+
 def get_recommendation(rec, student_row, k=5):
     """Neighbour summary plus up to 3 suggestions for one student (1-row df)."""
     _, sims, outcomes = similar_students(rec, student_row, k)

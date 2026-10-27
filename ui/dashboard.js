@@ -10,6 +10,11 @@ const LANES = [
   ["Green", "green", "On track", "No action needed", "var(--ok)"]
 ];
 const STEP = 12;
+// Numbers / yes-no answers the model can read directly (shown in "What moved the risk").
+const SCORED = KEY.concat(["Previous qualification (grade)", "Displaced", "Educational special needs", "Daytime/evening attendance"]);
+// Coded family / background columns: compared with past students in the same group.
+const BG_FIELDS = ["Previous qualification", "Course", "Application mode", "Mother's qualification", "Father's qualification",
+  "Mother's occupation", "Father's occupation", "Marital status", "Nacionality", "Age at enrollment"];
 
 const students = E.students.map(s => {
   const values = {};
@@ -65,6 +70,11 @@ function openStudent(id) {
   const reasons = res.contributions.filter(c => KEY.includes(c[0])).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 3);
   const sentence = { Red: "High risk: contact this student this week.", Yellow: "Medium risk: check in after the next assessment.",
     Green: "Low risk: no action needed right now." }[s.tier];
+  const bgRows = backgroundRows(v, BG_FIELDS);
+  const bgTips = backgroundSupport(Object.fromEntries(BG_FIELDS.map((f, i) => [f, bgRows[i][1].label])
+    .concat([["Daytime/evening attendance", showValue("Daytime/evening attendance", v["Daytime/evening attendance"])],
+      ["Educational special needs", showValue("Educational special needs", v["Educational special needs"])]])), v["Age at enrollment"]);
+  const high = bgRows.filter(r => r[1].rate > OVERALL + .05);
 
   $("modalBody").innerHTML = `
     <div class="m-top"><h2>${s.id} ${tierPill(s.tier)}</h2><button class="m-close" id="close" aria-label="Close">✕</button></div>
@@ -84,8 +94,16 @@ function openStudent(id) {
         <div class="m-sec"><h3><span class="num">1</span>Why this score</h3><ul class="why">${reasons.map(([f, c]) =>
           `<li><span class="${c > 0 ? "up" : "down"}">${c > 0 ? "▲" : "▼"}</span><span>${nice(f)}: <b>${showValue(f, v[f])}</b> ${c > 0 ? "raises" : "lowers"} the risk</span></li>`).join("")}</ul></div>
         <div class="m-sec"><h3><span class="num">2</span>What to do</h3>${tips.map(t => `<div class="tip">${t}</div>`).join("")}
+          ${bgTips.map(t => `<div class="tip bg">${t}</div>`).join("")}
           <p class="hint">${k} of the 5 most similar past students dropped out.</p></div>
+        <div class="m-sec"><h3><span class="num">3</span>Family and background</h3>
+          <p class="hint">${high.length ? `Past students like this one dropped out more often for: <b>${high.map(r => r[0].toLowerCase()).join(", ")}</b>.`
+            : "No background group with clearly higher dropout than average."}</p></div>
       </div>
+    </div>
+    <div class="m-charts">
+      <div><h4>What moved the risk</h4><div class="m-chart"><canvas id="mContrib"></canvas></div></div>
+      <div><h4>Past students with the same background</h4><div class="m-chart"><canvas id="mBg"></canvas></div></div>
     </div>
     <div class="m-foot"><span class="hint">Alerts are drafts. Nothing is sent automatically.</span>
       <div class="btns"><button class="btn" type="button" id="copy">Copy alert for mentor</button>
@@ -98,6 +116,10 @@ function openStudent(id) {
   $("modalBody").scrollTop = 0;
   $("close").focus();
   $("close").addEventListener("click", closeStudent);
+  if (window.Chart) {
+    contribChart($("mContrib"), res.contributions, v, SCORED, 7);
+    backgroundChart($("mBg"), bgRows);
+  }
   $("copy").addEventListener("click", () =>
     navigator.clipboard.writeText($("alertText").value).then(() => $("copy").textContent = "Copied ✓"));
 }
